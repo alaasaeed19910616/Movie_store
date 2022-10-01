@@ -1,0 +1,29 @@
+﻿using Microsoft.Ajax.Utilities;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Web;
+
+namespace Movie_store.Models
+{
+    public class Min18YearsIfAMember :  ValidationAttribute
+    {
+        protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+        {
+            var customer = (Customer)validationContext.ObjectInstance;
+
+            // I do not want to get error message if the user does not select a membership to the customer
+            if (customer.MembershipTypeId == 0 || customer.MembershipTypeId == 1)
+                return ValidationResult.Success;
+
+            if (customer.Birthdate == null)
+                return new ValidationResult("Birthdate is required");
+
+            var age = DateTime.Today.Year - customer.Birthdate.Value.Year;
+
+            return (age > 18) ? ValidationResult.Success
+                : new ValidationResult("Customer should be at least 18 years old to be a member.");
+        }
+    }
+}
