@@ -38,6 +38,7 @@ namespace Movie_store.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Save(Customer customer)
         {
+            // Adding Validation
             if (!ModelState.IsValid)
             {
                 var viewModel = new Movie_store.ViewModels.CustomerFormViewModel
@@ -48,6 +49,7 @@ namespace Movie_store.Controllers
 
                 return View("CustomerForm", viewModel);
             }
+
             if (customer.Id == 0)
                 _context.Customers.Add(customer);
             else
