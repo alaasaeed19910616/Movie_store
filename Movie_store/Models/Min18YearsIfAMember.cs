@@ -14,7 +14,8 @@ namespace Movie_store.Models
             var customer = (Customer)validationContext.ObjectInstance;
 
             // I do not want to get error message if the user does not select a membership to the customer
-            if (customer.MembershipTypeId == 0 || customer.MembershipTypeId == 1)
+            if (customer.MembershipTypeId == MembershipType.Unkown ||
+                customer.MembershipTypeId == MembershipType.PayAsYouGo)
                 return ValidationResult.Success;
 
             if (customer.Birthdate == null)
