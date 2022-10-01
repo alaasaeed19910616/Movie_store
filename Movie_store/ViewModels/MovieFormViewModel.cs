@@ -9,7 +9,9 @@ namespace Movie_store.ViewModels
     public class MovieFormViewModel
     {
         public IEnumerable<Genre> Genres { get; set; }
+
         public Movie Movie { get; set; }
+
         public string Title
         {
             get
