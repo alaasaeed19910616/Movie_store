@@ -25,7 +25,10 @@ namespace Movie_store.Controllers
         {
             var movies = _context.Movies.Include(m => m.Genre).ToList();
 
-            return View(movies);
+            if (User.IsInRole("CanManageMovie"))
+                return View("List", movies);
+            else
+                return View("ReadOnlyList", movies);
         }
 
         public ActionResult Details(int id)
@@ -37,6 +40,7 @@ namespace Movie_store.Controllers
             return View(movie);
         }
 
+        [Authorize(Roles = "CanManageMovie")]
         public ActionResult New()
         {
             var genres = _context.Genres.ToList();
@@ -50,6 +54,7 @@ namespace Movie_store.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "CanManageMovie")]
         public ActionResult Save(Movie movie)
         {
             // Adding Validation
@@ -82,6 +87,8 @@ namespace Movie_store.Controllers
 
             return RedirectToAction("Index", "Movies");
         }
+
+        [Authorize(Roles = "CanManageMovie")]
         public ActionResult Edit(int id)
         {
             var movie = _context.Movies.SingleOrDefault(m => m.Id == id);
