@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Data.Entity;
 
 namespace Movie_store.Controllers.API
 {
@@ -22,14 +23,19 @@ namespace Movie_store.Controllers.API
         // GET /api/movies
         public IHttpActionResult GetMovies()
         {
-            var movieDtos = _context.Movies.ToList().Select(Mapper.Map<Movie, MovieDto>);
+            var movieDtos = _context.Movies
+                .Include(m => m.Genre)
+                .ToList()
+                .Select(Mapper.Map<Movie, MovieDto>);
             return Ok(movieDtos);
         }
 
         // GET /api/movies/1
         public IHttpActionResult GetMovie(int id)
         {
-            var movie = _context.Movies.SingleOrDefault(c => c.Id == id);
+            var movie = _context.Movies
+                .Include(m => m.Genre)
+                .SingleOrDefault(c => c.Id == id);
 
             if (movie == null)
                 return NotFound();

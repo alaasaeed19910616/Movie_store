@@ -23,5 +23,7 @@ namespace Movie_store.Dtos
 
         [Required]
         public byte GenreId { get; set; }
+
+        public GenreDto Genre { get; set; }
     }
 }
