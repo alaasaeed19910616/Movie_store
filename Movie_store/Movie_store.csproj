@@ -248,6 +248,10 @@
     <Compile Include="Migrations\202209292146497_UpdateGenrePropInMovie.designer.cs">
       <DependentUpon>202209292146497_UpdateGenrePropInMovie.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202210022222350_SeedUswers.cs" />
+    <Compile Include="Migrations\202210022222350_SeedUswers.designer.cs">
+      <DependentUpon>202210022222350_SeedUswers.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -557,6 +561,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202209292146497_UpdateGenrePropInMovie.resx">
       <DependentUpon>202209292146497_UpdateGenrePropInMovie.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202210022222350_SeedUswers.resx">
+      <DependentUpon>202210022222350_SeedUswers.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
